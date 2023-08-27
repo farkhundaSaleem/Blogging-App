@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Document</title>
+  <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylefiles/dashboard.css">
+  <style>
+    .blog-content {
+      display: flex;
+      align-items: flex-start;
+      padding: 10px;
+    }
+
+    .blog-image {
+      max-width: 100px;
+      margin-right: 10px;
+    }
+
+    .blog-text {
+      flex: 1;
+    }
+
+    li {
+      list-style: circle;
+    }
+   .update{
+color:  #6f42c1; 
+border: 1px solid grey;
+border-radius: 2px;
+   }
+
+   .delete{
+color:  #6f42c1;
+border: 1px solid grey;
+border-radius: 2px; 
+   }
+
+   .aa:hover{
+color:black !important; 
+}
+    
+  </style>
+</head>
+
+
+<body>
+  <nav class="navbar navip">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <span class="navbar-brand mb-0 h1">Personal Blogging App</span>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-primary me-2"  > <a style="text-decoration: none;color: white;" href="./profile.html">User</a></button>
+        <button type="button" class="btn btn-outline-light logbtn btn-md" > <a style="text-decoration: none;color: white;" class="aa" href="/htmlfiles/login.html">Login</a></button>
+      </div>
+    </div>
+  </nav>
+  <nav class="navbar secondh">
+    <div class="container-fluid">
+        <span style="color: black;"  class="navbar-brand mb-0 h1 log">Dashboard</span>
+  </nav> 
+
+  <div class="container cont2">
+
+    <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary forms" id="postForm">
+
+
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="title" placeholder="Title">
+        <label for="floatingInput">Title</label>
+      </div>
+      <div class=" mb-3">
+        <textarea id="content" name="content" rows="4" cols="50" required class="form-control"
+          placeholder="What's on your mind"></textarea>
+      </div>
+
+      <button class="w-50 btn pub " type="submit">Publish Blog</button>
+
+    </form>
+
+  </div>
+
+
+
+  <div class="container cont2" id="blogContainer">
+    <span class="myblogs">My Blogs</span> <br> <br>
+    <ul id="postList"></ul>
+
+
+  </div>
+
+
+
+
+  <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Function to save the blog posts to localStorage
+function savePosts(posts) {
+    localStorage.setItem("blogPosts", JSON.stringify(posts));
+}
+
+// Function to retrieve blog posts from localStorage
+function getPosts() {
+    const postsJSON = localStorage.getItem("blogPosts");
+    return JSON.parse(postsJSON) || [];
+}
+
+// Load initial posts from localStorage
+const initialPosts = getPosts();
+
+// Display initial posts
+const postList = document.getElementById("postList");
+for (const post of initialPosts) {
+    const postItem = document.createElement("li");
+    postItem.classList.add("blog-post");
+    postItem.innerHTML = post;
+    postList.appendChild(postItem);
+}
+
+document.getElementById("postForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const content = document.getElementById("content").value;
+    const timestamp = new Date().toLocaleString(); // Get current timestamp
+
+    const imageUrl = "/Screenshot 2023-08-25 154634.jpg"; // Replace with the actual image URL
+
+    const postContent = `
+        <div class="blog-content">
+            <img src="${imageUrl}" alt="Blog Image" class="blog-image">
+            <div class="blog-text">
+                <strong>${title}</strong><br>
+                ${content}<br>
+                <small>${timestamp}</small>
+            </div>
+        </div>
+    `;
+
+    const postItem = document.createElement("li");
+    postItem.classList.add("blog-post");
+    postItem.innerHTML = postContent;
+    postList.insertBefore(postItem, postList.firstChild);
+
+    // Save the new post to localStorage
+    const currentPosts = getPosts();
+    currentPosts.unshift(postContent);
+    savePosts(currentPosts);
+
+    // Clear the form fields after publishing
+    document.getElementById("title").value = "";
+    document.getElementById("content").value = "";
+});
+
+
+
+
+
+
+
+  </script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+<script src="/jsfiles/firebase-config.js"></script>
+<script src="/jsfiles/app.js"></script>
+
+</body>
+
+</html>

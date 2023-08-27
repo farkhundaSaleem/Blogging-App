@@ -1,0 +1,66 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navip{
+    background-color: #6f42c1;
+    height: 5rem !important;
+ 
+}
+
+.navbar-brand{
+    color: white;
+    font-size: x-large;
+}
+
+.secondh{
+    background-color: rgb(227, 221, 221);
+   
+}
+.dash{
+    color: black;
+}
+.forms{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+.cont2{
+   
+    padding: 2% ;
+    width:70%;
+    float: left;
+    margin-left: 5%;
+   
+   
+}
+.pub{
+    background-color: #6f42c1 !important ;
+    color: white !important;
+    width: 15% !important;
+  
+}
+.pub:hover{
+    background-color:white!important;
+    color: black!important;
+    border: 2px solid black !important;
+    
+}
+.myblogs{
+    font-size: xx-large;
+    padding: 5px;
+    font-weight: 600;
+    line-height: 3rem !important;
+
+}
+@media screen and (max-width: 1400px) {
+    .pub {
+        background-color: #6f42c1 !important;
+        color: white !important;
+        width: 10rem !important ;
+      
+    }
+}
